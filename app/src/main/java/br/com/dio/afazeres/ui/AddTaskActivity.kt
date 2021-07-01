@@ -3,8 +3,8 @@ package br.com.dio.afazeres.ui
 import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import br.com.dio.afazeres.MyApplication
 import br.com.dio.afazeres.databinding.ActivityAddTaskBinding
-import br.com.dio.afazeres.datasource.TaskDataSource
 import br.com.dio.afazeres.extensions.format
 import br.com.dio.afazeres.extensions.text
 import br.com.dio.afazeres.model.Task
@@ -25,7 +25,7 @@ class AddTaskActivity : AppCompatActivity() {
 
         if (intent.hasExtra(TASK_ID)) {
             val taskId = intent.getIntExtra(TASK_ID, 0)
-            TaskDataSource.findById(taskId)?.let {
+            MyApplication.database?.taskDAO()?.findById(taskId)?.let {
                 binding.tilTitle.text = it.title
                 binding.tilDate.text = it.date
                 binding.tilHour.text = it.hour
@@ -73,7 +73,10 @@ class AddTaskActivity : AppCompatActivity() {
                 hour = binding.tilHour.text,
                 id = intent.getIntExtra(TASK_ID, 0)
             )
-            TaskDataSource.insertTask(task)
+            if (task.id == 0)
+                MyApplication.database?.taskDAO()?.insertTask(task)
+            else
+                MyApplication.database?.taskDAO()?.updateTask(task)
             setResult(Activity.RESULT_OK)
             finish()
         }

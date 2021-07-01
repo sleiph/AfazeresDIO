@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import br.com.dio.afazeres.MyApplication
 import br.com.dio.afazeres.databinding.ActivityMainBinding
-import br.com.dio.afazeres.datasource.TaskDataSource
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         adapter.listenerDelete = {
-            TaskDataSource.deleteTask(it)
+            MyApplication.database?.taskDAO()?.deleteTask(it)
             updateList()
         }
     }
@@ -50,9 +50,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateList() {
-        val list = TaskDataSource.getList()
-        binding.includeEmpty.emptyState.visibility = if (list.isEmpty()) View.VISIBLE
-        else View.GONE
+        val list = MyApplication.database?.taskDAO()?.getList()
+        if (list != null) {
+            binding.includeEmpty.emptyState.visibility = if (list.isEmpty()) View.VISIBLE
+            else View.GONE
+        }
 
         adapter.submitList(list)
     }
