@@ -3,7 +3,6 @@ package br.com.dio.afazeres.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import br.com.dio.afazeres.databinding.ActivityMainBinding
@@ -29,7 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun insertListeners() {
         binding.fab.setOnClickListener {
-            startActivityForResult(Intent(this, AddTaskActivity::class.java), CREATE_NEW_TASK)
+            val intent = Intent(this, AddTaskActivity::class.java)
+            startActivityForResult(intent, CREATE_NEW_TASK)
         }
 
         adapter.listenerEdit = {
