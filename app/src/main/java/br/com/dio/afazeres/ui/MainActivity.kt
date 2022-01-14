@@ -22,20 +22,20 @@ class MainActivity : AppCompatActivity() {
         updateList()
 
         insertListeners()
-        //DATA STORE
-        //ROOM
+
     }
 
     private fun insertListeners() {
         binding.fab.setOnClickListener {
             val intent = Intent(this, AddTaskActivity::class.java)
             startActivityForResult(intent, CREATE_NEW_TASK)
+
         }
 
         adapter.listenerEdit = {
             val intent = Intent(this, AddTaskActivity::class.java)
             intent.putExtra(AddTaskActivity.TASK_ID, it.id)
-            startActivityForResult(intent, CREATE_NEW_TASK)
+            startActivityForResult(intent, UPDATE_TASK)
         }
 
         adapter.listenerDelete = {
@@ -46,14 +46,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CREATE_NEW_TASK && resultCode == Activity.RESULT_OK) updateList()
+        if ((requestCode == CREATE_NEW_TASK || requestCode == UPDATE_TASK) && resultCode == Activity.RESULT_OK) {
+            updateList()
+        }
     }
 
     private fun updateList() {
         val list = MyApplication.database?.taskDAO()?.getList()
         if (list != null) {
-            binding.includeEmpty.emptyState.visibility = if (list.isEmpty()) View.VISIBLE
-            else View.GONE
+            binding.includeEmpty.emptyState.visibility =
+                if (list.isEmpty()) View.VISIBLE
+                else View.GONE
         }
 
         adapter.submitList(list)
@@ -61,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val CREATE_NEW_TASK = 1000
+        private const val UPDATE_TASK = 2000
     }
 
 }

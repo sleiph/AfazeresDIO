@@ -3,6 +3,7 @@ package br.com.dio.afazeres.ui
 import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import br.com.dio.afazeres.R
 import br.com.dio.afazeres.MyApplication
 import br.com.dio.afazeres.databinding.ActivityAddTaskBinding
 import br.com.dio.afazeres.extensions.format
@@ -30,6 +31,9 @@ class AddTaskActivity : AppCompatActivity() {
                 binding.tilDate.text = it.date
                 binding.tilHour.text = it.hour
             }
+
+            // gambiarra pra trocar o texto de "crair tarefa" pra "editar tarefa"
+            binding.btnNewTask.text = getString(R.string.label_edit_task)
         }
 
         insertListeners()
@@ -81,7 +85,6 @@ class AddTaskActivity : AppCompatActivity() {
             finish()
         }
     }
-
 
     companion object {
         const val TASK_ID = "task_id"

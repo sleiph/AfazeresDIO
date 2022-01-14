@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="atividade_lista">36dp</dimen>
+
+    <dimen name="margem">16dp</dimen>
+    <dimen name="margem_metade">8dp</dimen>
+    <dimen name="margem_grande">32dp</dimen>
+
+    <dimen name="texto_titulo">24sp</dimen>
+    <dimen name="texto_corpo">18sp</dimen>
+</resources>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Afazeres</string>
     <string name="label_new_task">Criar Tarefa</string>
+    <string name="label_edit_task">Atualizar Tarefa</string>
     <string name="label_title">Título</string>
     <string name="label_date">Data</string>
     <string name="label_hour">Hora</string>
@@ -10,4 +11,6 @@
     <string name="label_edit">Editar</string>
     <string name="label_delete">Deletar</string>
     <string name="label_you_dont_have_tasks">Ops! Você não possui\nnenhum tarefa</string>
+    <string name="descricao_dummy">Passear com o cachorro</string>
+    <string name="data_dummy">01/01/2021 18:00</string>
 </resources>

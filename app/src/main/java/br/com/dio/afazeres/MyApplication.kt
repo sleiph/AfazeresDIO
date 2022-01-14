@@ -10,7 +10,6 @@ open class MyApplication : Application() {
         var database: TasksDataBase? = null
     }
 
-
     override fun onCreate() {
         super.onCreate()
         //Room
